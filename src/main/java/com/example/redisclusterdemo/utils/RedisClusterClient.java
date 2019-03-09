@@ -15,7 +15,24 @@ public class RedisClusterClient {
     public boolean setString(String key, String value) {
         String set = jedisCluster.set(key, value);
         System.out.println(set);
+
         return true;
+    }
+
+    public boolean setNxString(String key, String value){
+        Long setnx = jedisCluster.setnx(key, value);
+        return setnx == 1? true:false;
+    }
+
+
+    public String setExString(String key, String value){
+        String setex = jedisCluster.setex(key, 10, value);
+        return setex;
+    }
+
+    public String msetSTring(String... args){
+        String mset = jedisCluster.mset(args);
+        return mset;
     }
 
     public String getString(String key){
